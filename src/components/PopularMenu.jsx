@@ -1,6 +1,7 @@
-import SectionTitle from "./SectionTitle";
+
 import MenuItemCard from "./MenuItemCard";
 import useMenu from "../hooks/useMenu";
+import { Link } from "react-router-dom";
 
 
 const PopularMenu = ({itemType}) => {
@@ -26,7 +27,7 @@ const PopularMenu = ({itemType}) => {
                 }
             </div>
             <div className="flex justify-center">
-                <button className="btn text-slate-500 border-0 border-b-4 btn-outline font-semibold">View Full Menu</button>
+                <Link to={`/order/${itemType}`}><button className="btn text-slate-500 border-0 border-b-4 btn-outline font-semibold">Buy Now</button></Link> 
             </div>
         </div>
     );

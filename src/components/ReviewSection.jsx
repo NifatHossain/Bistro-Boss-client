@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 const ReviewSection = () => {
   const [ reviews, setReviews ] = useState([]);
   useEffect(() => {
-    fetch("../../public/reviews.json")
+    fetch("http://localhost:5000/allreviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
