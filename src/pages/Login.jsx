@@ -1,8 +1,29 @@
+import { useContext } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const Login = () => {
+    const {signIn}=useContext(AuthContext)
+    const location=useLocation()
+    const navigate= useNavigate();
+    const handleSignIn=(e)=>{
+        e.preventDefault()
+        const form= e.target;
+        const email= form.email.value;
+        const password= form.password.value;
+        signIn(email,password)
+            .then(result=>{
+                const user= result.user;
+                console.log(user);
+                alert('login Successful')
+                navigate(location?.state? location.state:'/')
+            })
+            .catch(error=>{
+                console.log(error.message)
+            })
+    }
     return (
         <div className="bg-[url('https://i.ibb.co/DY1w78j/login-bg.png')] bg-center bg-cover h-screen pt-10">
             <Helmet>
@@ -15,7 +36,7 @@ const Login = () => {
                 </div>
                 <div>
                 {/* onSubmit={handleLogIn} */}
-                    <form  className="flex flex-col gap-3">
+                    <form onSubmit={handleSignIn}  className="flex flex-col gap-3">
                         <input type="email" name="email" placeholder="Email Address" className="p-4  border-2 rounded-lg" />
                         <input type="password" name="password" placeholder="Enter Password" className="p-4  border-2 rounded-lg" />
                         <input type="submit" value={'Signin'} className="p-4 cursor-pointer text-xl font-semibold bg-blue-500 text-white rounded-lg"/>
