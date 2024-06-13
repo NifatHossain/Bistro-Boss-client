@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import useCart from "../hooks/useCart";
 
 
 const Navbar = () => {
@@ -20,6 +21,7 @@ const Navbar = () => {
                 console.log(error.message)
             })
     }
+    const [carts]=useCart()
     return (
         <div>
             <div className="navbar fixed z-10 opacity-75 bg-black text-white max-w-7xl">
@@ -33,10 +35,10 @@ const Navbar = () => {
                         <li><Link to={'/menu'}>Menu</Link></li>
                         <li><Link to={'/order'}>Order</Link></li>
                         {/* <li>{user?.displayName}</li> */}
-                        <li><button className="btn p-0">
+                        <li><Link to={'/dashboard/cart'}><button className="p-0">
                                 Cart
-                                <div className="badge badge-secondary">+99</div>
-                            </button>
+                                <div className="badge badge-secondary">{carts.length}</div>
+                            </button></Link>
                         </li>
                         
                     </ul>
@@ -47,13 +49,13 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1">
                     <li><Link to={'/'}>Home</Link></li>
                     <li><Link to={'/menu'}>Menu</Link></li>
-                    <li><Link to={'/order'}>Order</Link></li>
+                    <li><Link to={'/order/dessert'}>Order</Link></li>
                     {/* <li>{user?.displayName}</li> */}
-                    <li><button className="btn p-0">
-                            Cart
-                            <div className="badge badge-secondary">+99</div>
-                        </button>
-                    </li>
+                    <li><Link to={'/dashboard/cart'}><button className="p-0">
+                                Cart
+                                <div className="badge badge-secondary">{carts.length}</div>
+                            </button></Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="navbar-end">

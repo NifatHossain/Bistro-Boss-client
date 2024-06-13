@@ -4,8 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from 'sweetalert2'
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { FaGoogle } from "react-icons/fa";
 
 const Register = () => {
+    const axiosPublic= useAxiosPublic();
     const captchaRef= useRef(null)
     const [disabled,setDisabled]=useState(true)
     const navigate= useNavigate();
@@ -32,20 +35,27 @@ const Register = () => {
         const image= form.image.value;
         const email= form.email.value;
         const password=form.password.value
+        const userInfo={name,email}
         signUp(email,password)
             .then(result=>{
                 const user= result.user;
                 console.log(user)
                 updateUserInfo(name,image)
                 .then(()=>{
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Successfully Updated user Info",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    navigate('/')
+                    axiosPublic.post('/adduser',userInfo)
+                    .then((result)=>{
+                         if(result.data.insertedId){
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Successfully Updated user Info",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate('/')
+                         }
+                    })
+                    
                 })
                 .catch((error)=>{
                     console.log(error)
@@ -79,6 +89,7 @@ const Register = () => {
                     <input type="submit"  disabled={disabled} value={'Register'} className="p-4 btn cursor-pointer text-xl font-semibold bg-blue-500 text-white border-2 rounded-lg"/>
                 </form>
                 <p className="mt-4">Already have an account? <Link to={'/signin'} className="text-blue-700">SignIn</Link> </p>
+                <button className="btn btn-block my-3 bg-green-400 border-2"><FaGoogle></FaGoogle> Google</button>
             </div>
             <div className="hidden md:block">
                 <img src="https://i.ibb.co/8BpLZ81/registration.jpg" alt="" />
