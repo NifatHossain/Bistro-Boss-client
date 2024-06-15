@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import GoogleSignIn from "../components/GoogleSignIn";
 
 
 const Login = () => {
@@ -42,7 +43,7 @@ const Login = () => {
                         <input type="submit" value={'Signin'} className="p-4 cursor-pointer text-xl font-semibold bg-blue-500 text-white rounded-lg"/>
                     </form>
                 </div>
-                <button  className="btn p-4 rounded-lg  font-medium"> <span className="text-xl"></span>Login with Google</button>
+                <GoogleSignIn></GoogleSignIn>
                 <p className="mt-4">Don&apos;t have an account? <Link to={'/register'} className="text-white">Register</Link> </p>
             </div>
         </div>

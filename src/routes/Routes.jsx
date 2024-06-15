@@ -14,6 +14,8 @@ import Reservation from "../pages/dasboard/Reservation";
 import Payment from "../pages/dasboard/Payment";
 import Reviews from "../pages/dasboard/Reviews";
 import Bookings from "../pages/dasboard/Bookings";
+import AdminHome from "../pages/dasboard/adminPanel/AdminHome";
+import AddItem from "../pages/dasboard/adminPanel/AddItem";
 
 
   export const router = createBrowserRouter([
@@ -54,6 +56,27 @@ import Bookings from "../pages/dasboard/Bookings";
         {
           path:'reservation',
           element:<Reservation></Reservation>
+        },
+        {
+          path:'payment',
+          element: <Payment></Payment>
+        },
+        {
+          path:'review',
+          element:<Reviews></Reviews>
+        },
+        {
+          path:'booking',
+          element:<Bookings></Bookings>
+        },
+        //admin routes
+        {
+          path:'adminhome',
+          element:<AdminHome></AdminHome>
+        },
+        {
+          path:'additem',
+          element:<AddItem></AddItem>
         },
         {
           path:'payment',

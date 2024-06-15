@@ -5,7 +5,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from 'sweetalert2'
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import { FaGoogle } from "react-icons/fa";
+import GoogleSignIn from "../components/GoogleSignIn";
 
 const Register = () => {
     const axiosPublic= useAxiosPublic();
@@ -88,8 +88,8 @@ const Register = () => {
                     <button className="btn" onClick={handleCaptchValidation}>validate captcha</button>
                     <input type="submit"  disabled={disabled} value={'Register'} className="p-4 btn cursor-pointer text-xl font-semibold bg-blue-500 text-white border-2 rounded-lg"/>
                 </form>
-                <p className="mt-4">Already have an account? <Link to={'/signin'} className="text-blue-700">SignIn</Link> </p>
-                <button className="btn btn-block my-3 bg-green-400 border-2"><FaGoogle></FaGoogle> Google</button>
+                <p className="mt-4">Already have an account? <Link to={'/login'} className="text-blue-700">SignIn</Link> </p>
+                <GoogleSignIn></GoogleSignIn>
             </div>
             <div className="hidden md:block">
                 <img src="https://i.ibb.co/8BpLZ81/registration.jpg" alt="" />
